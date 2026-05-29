@@ -38,18 +38,16 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 ### Launch Prebuilt Executable
 
-```text
-SimpleMiner/Run/SimpleMiner_Release_x64.exe
-```
+```SimpleMiner/Run/SimpleMiner_Release_x64.exe```
 
-### Build From Source
+### Or Build From Source
 
 1. Open `SimpleMiner/SimpleMiner.sln` in Visual Studio 2022.
 
 2. Configure the debugger settings:
 
-   * Right-click the **SimpleMiner** project and select **Properties**
-   * Navigate to **Configuration Properties > Debugging**
+   * Right-click the ```SimpleMiner``` project and select ```Properties```
+   * Navigate to ```Configuration Properties > Debugging```
    * Set:
 
    ```text
@@ -60,22 +58,14 @@ SimpleMiner/Run/SimpleMiner_Release_x64.exe
       <img src="Media/ConfigurationSettings.png" width="80%">
     </p>
 
-3. Build the solution:
+3. Build the solution: ```Ctrl + Shift + B ```
 
-   ```text
-   Ctrl + Shift + B
-   ```
-
-4. Run the project:
-
-   ```text
-   F5
-   ```
+4. Run the project: ```F5 ```
 
 Recommended build configurations:
 
-* Release
-* Fast_Break
+* ```Release```
+* ```Fast_Break```
 
 ---
 ## Controls
