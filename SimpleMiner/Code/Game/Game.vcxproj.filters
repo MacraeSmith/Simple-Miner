@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Framework\Entities">
+      <UniqueIdentifier>{1bea084a-e9af-4d29-9370-bc175f3e5b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\World">
+      <UniqueIdentifier>{3833b800-f3d7-4a74-a0f2-ee702b3095c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\XML Definitions">
+      <UniqueIdentifier>{42ceebc4-c1ae-4954-b195-0a27a6c87146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shaders">
+      <UniqueIdentifier>{6fcd2c08-5017-4c3a-8a4a-ed02af9eb999}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main_Windows.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCommon.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Framework\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Framework\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockDefinition.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockIterator.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldDefinition.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera.cpp">
+      <Filter>Framework\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInventory.cpp">
+      <Filter>Framework\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="LitTnt.cpp">
+      <Filter>Framework\Entities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.hpp">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCommon.hpp">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBuildPreferences.hpp">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.hpp">
+      <Filter>Framework\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Framework\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.hpp">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.hpp">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockDefinition.hpp">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="World.hpp">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockIterator.hpp">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldDefinition.hpp">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.hpp">
+      <Filter>Framework\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInventory.hpp">
+      <Filter>Framework\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="LitTnt.hpp">
+      <Filter>Framework\Entities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Run\Data\Definitions\BlockSpriteSheet_BlockDefinitions.xml">
+      <Filter>Framework\XML Definitions</Filter>
+    </Xml>
+    <Xml Include="..\..\Run\Data\Definitions\GameConfig.xml">
+      <Filter>Framework\XML Definitions</Filter>
+    </Xml>
+    <Xml Include="..\..\Run\Data\Definitions\DefaultWorldDefinition.xml">
+      <Filter>Framework\XML Definitions</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Run\Data\Shaders\Chunk.hlsl">
+      <Filter>Framework\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Run\Data\Shaders\Water.hlsl">
+      <Filter>Framework\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Run\Data\Shaders\UnderWater_PostProcess.hlsl">
+      <Filter>Framework\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Run\Data\Shaders\UnderWaterSurface.hlsl">
+      <Filter>Framework\Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

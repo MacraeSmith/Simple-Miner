@@ -1,0 +1,1065 @@
+<Definitions>
+	<WorldDefinition name = "Default World"
+					 seaHeight ="100"
+					 fillWater ="true"
+					 spriteSheet = "Data/Images/SpriteSheet_Dokucraft_High_32_AlphaIncluded.png" spriteSheetDimensions="8,8" mipLevels="5"
+					 waterTexture ="Data/Images/Water_32x.png"
+					 hudTexture="Data/Images/InventoryHUD.png"
+					 selectedBlockTexture="Data/Images/SelectedBlock.png"
+					 blockIconsSpriteSheet ="Data/Images/BlockIconSS.png" blockSpriteSheetDimensions="6,6"
+					 chunkShader="Data/Shaders/Chunk"
+					 waterShader="Data/Shaders/Water"
+					 underWaterSurfaceShader ="Data/Shaders/UnderWaterSurface"
+					 underWaterShader="Data/Shaders/UnderWater_PostProcess"
+					 >
+		<Noise gameSeed="18" defaultOctavePersistance="0.5" defaultOctaveScale="2.0" baseTerrainSquashFactor="0.25" finalTerrainSquashFactor="0.025" 
+			   defaultTerrainHeight ="128" terrainMinHeight ="50" cavesStartDepth="10" cavesFade="15">
+			<NoiseInfo name ="Base Terrain" isActive="true" type="perlin" scale="205" numOctaves="6" seed="1" warpStrength ="0.0">
+			</NoiseInfo>
+			<NoiseInfo name ="Continentalness" isActive="true" type="perlin" scale="524" numOctaves="7" seed="2" warpStrength ="100.0">
+				<Curve type="heightOffset">
+					<PlotPoint point ="-1.0, -0.6" type ="smoothStart" exponent="3"> </PlotPoint>
+					<PlotPoint point ="-0.1, -0.04" type ="smoothStart" exponent="3"> </PlotPoint>
+					<PlotPoint point ="0.1, 0.04" type ="linear"> </PlotPoint>
+					<PlotPoint point ="1.0, 0.6" type ="linear"> </PlotPoint>
+				</Curve>
+				<Curve type="squashCurve">
+					<PlotPoint point ="-1.0, 0.0" type ="smoothStart" exponent="3"> </PlotPoint>
+					<PlotPoint point ="-0.5, 0.0" type ="smoothStart" exponent="3"> </PlotPoint>
+					<PlotPoint point ="-0.25, 2.0" type ="smoothStart" exponent="3"> </PlotPoint>
+					<PlotPoint point ="0.25, 2.0" type ="linear"> </PlotPoint>z
+					<PlotPoint point ="1.0, -1.0" type ="linear"> </PlotPoint>
+				</Curve>
+			</NoiseInfo>
+			<NoiseInfo name ="Erosion" isActive="true" type="perlin" scale="256" numOctaves="4" seed="3" warpStrength ="300.0">
+				<Curve type="heightOffset">
+					<PlotPoint point ="-1.0, 0.0" type ="linear"> </PlotPoint>
+					<PlotPoint point ="-0.05, 0.0" type ="linear"> </PlotPoint>
+					<PlotPoint point ="0.05, -0.05" type ="linear"> </PlotPoint>
+					<PlotPoint point ="0.35, -0.05" type ="linear"> </PlotPoint>
+					<PlotPoint point ="0.45, 0.0" type ="linear"> </PlotPoint>
+					<PlotPoint point ="1.0, 0.0" type ="linear"> </PlotPoint>
+				</Curve>
+				<Curve type="squashCurve">
+					<PlotPoint point ="-1.0, 0.0" type ="linear"> </PlotPoint>
+					<PlotPoint point ="-0.05, 0.0" type ="linear"> </PlotPoint>
+					<PlotPoint point ="0.05, 0.2" type ="linear"> </PlotPoint>
+					<PlotPoint point ="0.35, 0.2" type ="linear"> </PlotPoint>
+					<PlotPoint point ="0.45, 0.0" type ="linear"> </PlotPoint>
+					<PlotPoint point ="1.0, 0.0" type ="linear"> </PlotPoint>
+				</Curve>
+			</NoiseInfo>
+			<NoiseInfo name ="Peaks and Valleys" isActive="true" type="perlin" scale="156" numOctaves="4" seed="4"  warpStrength ="0.0">
+				<Curve type="heightOffset">
+					<PlotPoint point="-1.0, -0.8" type="linear"/>
+					<PlotPoint point="-0.7, -0.8" type="linear"/>
+					<PlotPoint point="-0.4, -0.6" type="linear"/>
+					<PlotPoint point="-0.2, -0.1" type="linear"/>
+					<PlotPoint point="0.0, 0.0" type="linear"/>
+					<PlotPoint point="0.4, 0.25" type="linear"/>
+					<PlotPoint point="0.7, 0.7" type="linear"/>
+					<PlotPoint point="0.9, 1.1" type="linear"/>
+					<PlotPoint point="1.0, 1.5" type="linear"/>
+				</Curve>
+				<Curve type="squashCurve">
+					<PlotPoint point="-1.0, 0.2" type="linear"/>
+					<PlotPoint point="-0.5, 0.4" type="linear"/>
+					<PlotPoint point="0.0, 0.6" type="smoothStep3"/>
+					<PlotPoint point="0.5, 0.0" type="linear"/>
+					<PlotPoint point="1.0, -1.0" type="smoothStep3"/>
+				</Curve>
+			</NoiseInfo>
+			<NoiseInfo name ="Temperature" type="fractal" scale="256" numOctaves="4" seed="5" warpStrength ="100"></NoiseInfo>
+			<NoiseInfo name ="IceMelt" type="rawZeroToOne" seed="8"></NoiseInfo>
+			<NoiseInfo name ="Humidity" type="perlin" scale="356" numOctaves="4" seed="6" warpStrength ="150"></NoiseInfo>
+			<NoiseInfo name ="Vegetation" type="rawZeroToOne" isActive="true" seed="7"></NoiseInfo>
+			<NoiseInfo name ="WildGrass" type="rawZeroToOne" isActive="true" seed="22"></NoiseInfo>
+			<NoiseInfo name ="WaterFalls" isActive="false" type="rawZeroToOne" seed="12"></NoiseInfo>
+			<NoiseInfo name ="NoiseFluctuation" type="rawNegOneToOne" seed="8"></NoiseInfo>
+			<NoiseInfo name ="TunnelSurfacePierce" type="rawZeroToOne" seed="9"></NoiseInfo>
+			<NoiseInfo name ="Caves" isActive="true" type="perlin" scale ="35" numOctaves="3" seed="10" warpStrength ="200"></NoiseInfo>
+			<NoiseInfo name ="Tunnels" isActive="true" type="ridged" scale ="78" numOctaves="4" seed="11" ridgeGain="2.0" warpStrength ="800.0"></NoiseInfo>
+		</Noise>
+		<Trees fadeLeaves="true" isActive ="false">
+			<TreeStamp name="Cactus" log="CactusLog" leaves="air" heightRange="2~4" treeHeight ="3">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,0,5" type="log"></Block>
+
+				<Block offset="1,0,0" type="leaves"></Block>
+				<Block offset="1,0,1" type="leaves"></Block>
+				<Block offset="1,0,2" type="leaves"></Block>
+				<Block offset="1,0,3" type="leaves"></Block>
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="1,0,5" type="leaves"></Block>
+
+				<Block offset="-1,0,0" type="leaves"></Block>
+				<Block offset="-1,0,1" type="leaves"></Block>
+				<Block offset="-1,0,2" type="leaves"></Block>
+				<Block offset="-1,0,3" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+
+				<Block offset="1,1,0" type="leaves"></Block>
+				<Block offset="1,1,1" type="leaves"></Block>
+				<Block offset="1,1,2" type="leaves"></Block>
+				<Block offset="1,1,3" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="1,1,5" type="leaves"></Block>
+				
+				<Block offset="1,-1,0" type="leaves"></Block>
+				<Block offset="1,-1,1" type="leaves"></Block>
+				<Block offset="1,-1,2" type="leaves"></Block>
+				<Block offset="1,-1,3" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+				<Block offset="1,-1,5" type="leaves"></Block>
+
+				<Block offset="-1,1,0" type="leaves"></Block>
+				<Block offset="-1,1,1" type="leaves"></Block>
+				<Block offset="-1,1,2" type="leaves"></Block>
+				<Block offset="-1,1,3" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="-1,1,5" type="leaves"></Block>
+
+				<Block offset="0,1,0" type="leaves"></Block>
+				<Block offset="0,1,1" type="leaves"></Block>
+				<Block offset="0,1,2" type="leaves"></Block>
+				<Block offset="0,1,3" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+
+				<Block offset="0,-1,0" type="leaves"></Block>
+				<Block offset="0,-1,1" type="leaves"></Block>
+				<Block offset="0,-1,2" type="leaves"></Block>
+				<Block offset="0,-1,3" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+			</TreeStamp>
+			<TreeStamp name="Acacia" log="AcaciaLog" leaves="AcaciaLeaves" heightRange="0~2" treeHeight="8">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,-1,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,-2,4" type="log"></Block>
+				<Block offset="0,1,5" type="log"></Block>
+				<Block offset="0,1,6" type="log"></Block>
+
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="1,-2,4" type="leaves"></Block>
+				<Block offset="-1,-2,4" type="leaves"></Block>
+				<Block offset="0,-3,4" type="leaves"></Block>
+				<Block offset="1,-3,4" type="leaves"></Block>
+				<Block offset="-1,-3,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="2,-1,4" type="leaves"></Block>
+				<Block offset="2,-2,4" type="leaves"></Block>
+				<Block offset="2,-3,4" type="leaves"></Block>
+				<Block offset="-2,-1,4" type="leaves"></Block>
+				<Block offset="-2,-2,4" type="leaves"></Block>
+				<Block offset="-2,-3,4" type="leaves"></Block>
+				<Block offset="1,-4,4" type="leaves"></Block>
+				<Block offset="0,-4,4" type="leaves"></Block>
+				<Block offset="-1,-4,4" type="leaves"></Block>
+
+				<Block offset="0,-2,5" type="leaves"></Block>
+				<Block offset="1,-2,5" type="leaves"></Block>
+				<Block offset="-1,-2,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+				<Block offset="0,-3,5" type="leaves"></Block>
+				<Block offset="1,-1,5" type="leaves"></Block>
+				<Block offset="1,-3,5" type="leaves"></Block>
+				<Block offset="-1,-1,5" type="leaves"></Block>
+				<Block offset="-1,-3,5" type="leaves"></Block>
+
+				<Block offset="1,1,6" type="leaves"></Block>
+				<Block offset="2,1,6" type="leaves"></Block>
+				<Block offset="0,2,6" type="leaves"></Block>
+				<Block offset="0,3,6" type="leaves"></Block>
+				<Block offset="2,2,6" type="leaves"></Block>
+				<Block offset="2,0,6" type="leaves"></Block>
+				<Block offset="1,3,6" type="leaves"></Block>
+				<Block offset="-1,3,6" type="leaves"></Block>
+				<Block offset="-2,2,6" type="leaves"></Block>
+				<Block offset="-2,0,6" type="leaves"></Block>
+				<Block offset="1,-1,6" type="leaves"></Block>
+				<Block offset="-1,-1,6" type="leaves"></Block>
+				<Block offset="-1,1,6" type="leaves"></Block>
+				<Block offset="-2,1,6" type="leaves"></Block>
+				<Block offset="0,0,6" type="leaves"></Block>
+				<Block offset="0,-1,6" type="leaves"></Block>
+				<Block offset="1,2,6" type="leaves"></Block>
+				<Block offset="2,3,6" type="leaves"></Block>
+				<Block offset="-1,0,6" type="leaves"></Block>
+				<Block offset="-2,-1,6" type="leaves"></Block>
+				<Block offset="-1,2,6" type="leaves"></Block>
+				<Block offset="-2,3,6" type="leaves"></Block>
+				<Block offset="1,0,6" type="leaves"></Block>
+				<Block offset="2,-1,6" type="leaves"></Block>
+				<Block offset="3,1,6" type="leaves"></Block>
+				<Block offset="0,4,6" type="leaves"></Block>
+				<Block offset="-3,1,6" type="leaves"></Block>
+				<Block offset="0,-2,6" type="leaves"></Block>
+				<Block offset="3,2,6" type="leaves"></Block>
+				<Block offset="1,4,6" type="leaves"></Block>
+				<Block offset="-3,2,6" type="leaves"></Block>
+				<Block offset="1,-2,6" type="leaves"></Block>
+				<Block offset="3,0,6" type="leaves"></Block>
+				<Block offset="-1,4,6" type="leaves"></Block>
+				<Block offset="-3,0,6" type="leaves"></Block>
+				<Block offset="-1,-2,6" type="leaves"></Block>
+				<Block offset="3,3,6" type="leaves"></Block>
+				<Block offset="2,4,6" type="leaves"></Block>
+				<Block offset="-3,3,6" type="leaves"></Block>
+				<Block offset="2,-2,6" type="leaves"></Block>
+				<Block offset="3,-1,6" type="leaves"></Block>
+				<Block offset="-2,4,6" type="leaves"></Block>
+				<Block offset="-3,-1,6" type="leaves"></Block>
+				<Block offset="-2,-2,6" type="leaves"></Block>
+
+				<Block offset="0,1,7" type="leaves"></Block>
+				<Block offset="0,0,7" type="leaves"></Block>
+				<Block offset="0,2,7" type="leaves"></Block>
+				<Block offset="1,1,7" type="leaves"></Block>
+				<Block offset="-1,1,7" type="leaves"></Block>
+				<Block offset="-1,0,7" type="leaves"></Block>
+				<Block offset="-1,2,7" type="leaves"></Block>
+				<Block offset="1,0,7" type="leaves"></Block>
+				<Block offset="1,2,7" type="leaves"></Block>
+				<Block offset="0,-1,7" type="leaves"></Block>
+				<Block offset="0,3,7" type="leaves"></Block>
+				<Block offset="2,1,7" type="leaves"></Block>
+				<Block offset="-2,1,7" type="leaves"></Block>
+
+			</TreeStamp>
+			<TreeStamp name="Oak" log="OakLog" leaves="OakLeaves"  heightRange="0~3" treeHeight="7">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,0,5" type="log"></Block>
+				
+				<Block offset="1,0,3" type="leaves"></Block>
+				<Block offset="2,0,3" type="leaves"></Block>
+				<Block offset="0,1,3" type="leaves"></Block>
+				<Block offset="0,2,3" type="leaves"></Block>
+				<Block offset="2,1,3" type="leaves"></Block>
+				<Block offset="2,-1,3" type="leaves"></Block>
+				<Block offset="1,2,3" type="leaves"></Block>
+				<Block offset="-1,2,3" type="leaves"></Block>
+				<Block offset="-2,1,3" type="leaves"></Block>
+				<Block offset="-2,-1,3" type="leaves"></Block>
+				<Block offset="1,-2,3" type="leaves"></Block>
+				<Block offset="-1,-2,3" type="leaves"></Block>
+				<Block offset="-1,0,3" type="leaves"></Block>
+				<Block offset="-2,0,3" type="leaves"></Block>
+				<Block offset="0,-1,3" type="leaves"></Block>
+				<Block offset="0,-2,3" type="leaves"></Block>
+				<Block offset="1,1,3" type="leaves"></Block>
+				<Block offset="2,2,3" type="leaves"></Block>
+				<Block offset="-1,-1,3" type="leaves"></Block>
+				<Block offset="-2,-2,3" type="leaves"></Block>
+				<Block offset="-1,1,3" type="leaves"></Block>
+				<Block offset="-2,2,3" type="leaves"></Block>
+				<Block offset="1,-1,3" type="leaves"></Block>
+				<Block offset="2,-2,3" type="leaves"></Block>
+
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="2,0,4" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="0,2,4" type="leaves"></Block>
+				<Block offset="2,1,4" type="leaves"></Block>
+				<Block offset="2,-1,4" type="leaves"></Block>
+				<Block offset="1,2,4" type="leaves"></Block>
+				<Block offset="-1,2,4" type="leaves"></Block>
+				<Block offset="-2,1,4" type="leaves"></Block>
+				<Block offset="-2,-1,4" type="leaves"></Block>
+				<Block offset="1,-2,4" type="leaves"></Block>
+				<Block offset="-1,-2,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="-2,0,4" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="0,-2,4" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="2,2,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+				<Block offset="-2,-2,4" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="-2,2,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+				<Block offset="2,-2,4" type="leaves"></Block>
+
+				<Block offset="1,0,5" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+				<Block offset="1,1,5" type="leaves"></Block>
+				<Block offset="1,-1,5" type="leaves"></Block>
+				<Block offset="-1,1,5" type="leaves"></Block>
+				<Block offset="-1,-1,5" type="leaves"></Block>
+
+				<Block offset="0,0,6" type="leaves"></Block>
+				<Block offset="1,0,6" type="leaves"></Block>
+				<Block offset="0,1,6" type="leaves"></Block>
+				<Block offset="-1,0,6" type="leaves"></Block>
+				<Block offset="0,-1,6" type="leaves"></Block>
+				
+			
+			</TreeStamp>
+			<TreeStamp name="Small Oak" log="OakLog" leaves="OakLeaves"  heightRange="0~1" treeHeight="6">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+
+				<Block offset="1,0,2" type="leaves"></Block>
+				<Block offset="2,0,2" type="leaves"></Block>
+				<Block offset="0,1,2" type="leaves"></Block>
+				<Block offset="0,2,2" type="leaves"></Block>
+				<Block offset="2,1,2" type="leaves"></Block>
+				<Block offset="2,-1,2" type="leaves"></Block>
+				<Block offset="1,2,2" type="leaves"></Block>
+				<Block offset="-1,2,2" type="leaves"></Block>
+				<Block offset="-2,1,2" type="leaves"></Block>
+				<Block offset="-2,-1,2" type="leaves"></Block>
+				<Block offset="1,-2,2" type="leaves"></Block>
+				<Block offset="-1,-2,2" type="leaves"></Block>
+				<Block offset="-1,0,2" type="leaves"></Block>
+				<Block offset="-2,0,2" type="leaves"></Block>
+				<Block offset="0,-1,2" type="leaves"></Block>
+				<Block offset="0,-2,2" type="leaves"></Block>
+				<Block offset="1,1,2" type="leaves"></Block>
+				<Block offset="2,2,2" type="leaves"></Block>
+				<Block offset="-1,-1,2" type="leaves"></Block>
+				<Block offset="-2,-2,2" type="leaves"></Block>
+				<Block offset="-1,1,2" type="leaves"></Block>
+				<Block offset="-2,2,2" type="leaves"></Block>
+				<Block offset="1,-1,2" type="leaves"></Block>
+				<Block offset="2,-2,2" type="leaves"></Block>
+
+				<Block offset="1,0,3" type="leaves"></Block>
+				<Block offset="2,0,3" type="leaves"></Block>
+				<Block offset="0,1,3" type="leaves"></Block>
+				<Block offset="0,2,3" type="leaves"></Block>
+				<Block offset="2,1,3" type="leaves"></Block>
+				<Block offset="2,-1,3" type="leaves"></Block>
+				<Block offset="1,2,3" type="leaves"></Block>
+				<Block offset="-1,2,3" type="leaves"></Block>
+				<Block offset="-2,1,3" type="leaves"></Block>
+				<Block offset="-2,-1,3" type="leaves"></Block>
+				<Block offset="1,-2,3" type="leaves"></Block>
+				<Block offset="-1,-2,3" type="leaves"></Block>
+				<Block offset="-1,0,3" type="leaves"></Block>
+				<Block offset="-2,0,3" type="leaves"></Block>
+				<Block offset="0,-1,3" type="leaves"></Block>
+				<Block offset="0,-2,3" type="leaves"></Block>
+				<Block offset="1,1,3" type="leaves"></Block>
+				<Block offset="2,2,3" type="leaves"></Block>
+				<Block offset="-1,-1,3" type="leaves"></Block>
+				<Block offset="-2,-2,3" type="leaves"></Block>
+				<Block offset="-1,1,3" type="leaves"></Block>
+				<Block offset="-2,2,3" type="leaves"></Block>
+				<Block offset="1,-1,3" type="leaves"></Block>
+				<Block offset="2,-2,3" type="leaves"></Block>
+
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+
+				<Block offset="0,0,5" type="leaves"></Block>
+				<Block offset="1,0,5" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+				
+			</TreeStamp>
+			<TreeStamp name="Leafless Oak" log="OakLog"  heightRange="0~2" treeHeight="4">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="1,0,2" type="log"></Block>
+				<Block offset="0,1,2" type="log"></Block>
+				<Block offset="1,0,3" type="log"></Block>
+			</TreeStamp>
+			<TreeStamp name="Birch" log="BirchLog" leaves="BirchLeaves"  heightRange="0~3" treeHeight="7">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+
+				<Block offset="1,0,3" type="leaves"></Block>
+				<Block offset="2,0,3" type="leaves"></Block>
+				<Block offset="0,1,3" type="leaves"></Block>
+				<Block offset="0,2,3" type="leaves"></Block>
+				<Block offset="2,1,3" type="leaves"></Block>
+				<Block offset="2,-1,3" type="leaves"></Block>
+				<Block offset="1,2,3" type="leaves"></Block>
+				<Block offset="-1,2,3" type="leaves"></Block>
+				<Block offset="-2,1,3" type="leaves"></Block>
+				<Block offset="-2,-1,3" type="leaves"></Block>
+				<Block offset="1,-2,3" type="leaves"></Block>
+				<Block offset="-1,-2,3" type="leaves"></Block>
+				<Block offset="-1,0,3" type="leaves"></Block>
+				<Block offset="-2,0,3" type="leaves"></Block>
+				<Block offset="0,-1,3" type="leaves"></Block>
+				<Block offset="0,-2,3" type="leaves"></Block>
+				<Block offset="1,1,3" type="leaves"></Block>
+				<Block offset="-1,-1,3" type="leaves"></Block>
+				<Block offset="-1,1,3" type="leaves"></Block>
+				<Block offset="-2,2,3" type="leaves"></Block>
+				<Block offset="1,-1,3" type="leaves"></Block>
+				<Block offset="2,-2,3" type="leaves"></Block>
+
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="2,0,4" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="0,2,4" type="leaves"></Block>
+				<Block offset="2,1,4" type="leaves"></Block>
+				<Block offset="2,-1,4" type="leaves"></Block>
+				<Block offset="1,2,4" type="leaves"></Block>
+				<Block offset="-1,2,4" type="leaves"></Block>
+				<Block offset="-2,1,4" type="leaves"></Block>
+				<Block offset="-2,-1,4" type="leaves"></Block>
+				<Block offset="1,-2,4" type="leaves"></Block>
+				<Block offset="-1,-2,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="-2,0,4" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="0,-2,4" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="2,2,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+				<Block offset="-2,-2,4" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+
+				<Block offset="1,0,5" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+				<Block offset="1,1,5" type="leaves"></Block>
+				<Block offset="1,-1,5" type="leaves"></Block>
+				<Block offset="-1,1,5" type="leaves"></Block>
+				<Block offset="-1,-1,5" type="leaves"></Block>
+
+				<Block offset="0,0,6" type="leaves"></Block>
+				<Block offset="1,0,6" type="leaves"></Block>
+				<Block offset="0,1,6" type="leaves"></Block>
+				<Block offset="-1,0,6" type="leaves"></Block>
+				<Block offset="0,-1,6" type="leaves"></Block>
+				
+				
+			</TreeStamp>
+			<TreeStamp name="Jungle" log="JungleLog" leaves="JungleLeaves"  heightRange="0~5" treeHeight="8">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,0,5" type="log"></Block>
+				<Block offset="0,0,6" type="log"></Block>
+				<Block offset="0,0,7" type="log"></Block>
+				
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="2,0,4" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="0,2,4" type="leaves"></Block>
+				<Block offset="2,1,4" type="leaves"></Block>
+				<Block offset="2,-1,4" type="leaves"></Block>
+				<Block offset="1,2,4" type="leaves"></Block>
+				<Block offset="-1,2,4" type="leaves"></Block>
+				<Block offset="-2,1,4" type="leaves"></Block>
+				<Block offset="-2,-1,4" type="leaves"></Block>
+				<Block offset="1,-2,4" type="leaves"></Block>
+				<Block offset="-1,-2,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="-2,0,4" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="0,-2,4" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+				<Block offset="-2,-2,4" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+				
+				<Block offset="1,0,5" type="leaves"></Block>
+				<Block offset="2,0,5" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+				<Block offset="0,2,5" type="leaves"></Block>
+				<Block offset="2,1,5" type="leaves"></Block>
+				<Block offset="2,-1,5" type="leaves"></Block>
+				<Block offset="1,2,5" type="leaves"></Block>
+				<Block offset="-1,2,5" type="leaves"></Block>
+				<Block offset="-2,1,5" type="leaves"></Block>
+				<Block offset="-2,-1,5" type="leaves"></Block>
+				<Block offset="1,-2,5" type="leaves"></Block>
+				<Block offset="-1,-2,5" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+				<Block offset="-2,0,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+				<Block offset="0,-2,5" type="leaves"></Block>
+				<Block offset="1,1,5" type="leaves"></Block>
+				<Block offset="-1,-1,5" type="leaves"></Block>
+				<Block offset="2,2,5" type="leaves"></Block>
+				<Block offset="2,-2,5" type="leaves"></Block>
+				<Block offset="-1,1,5" type="leaves"></Block>
+				<Block offset="1,-1,5" type="leaves"></Block>
+				
+				<Block offset="1,0,6" type="leaves"></Block>
+				<Block offset="0,1,6" type="leaves"></Block>
+				<Block offset="-1,0,6" type="leaves"></Block>
+				<Block offset="0,-1,6" type="leaves"></Block>
+				<Block offset="1,1,6" type="leaves"></Block>
+				<Block offset="1,-1,6" type="leaves"></Block>
+				
+				<Block offset="0,0,7" type="leaves"></Block>
+				<Block offset="1,0,7" type="leaves"></Block>
+				<Block offset="0,1,7" type="leaves"></Block>
+				<Block offset="-1,0,7" type="leaves"></Block>
+				<Block offset="0,-1,7" type="leaves"></Block>
+				
+			</TreeStamp>
+			<TreeStamp name="Mega Jungle" log="JungleLog" leaves="JungleLeaves"  heightRange="0~0" treeHeight="20">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,1,0" type="log"></Block>
+				<Block offset="1,0,0" type="log"></Block>
+				<Block offset="1,1,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,1,1" type="log"></Block>
+				<Block offset="1,0,1" type="log"></Block>
+				<Block offset="1,1,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,1,2" type="log"></Block>
+				<Block offset="1,0,2" type="log"></Block>
+				<Block offset="1,1,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,1,3" type="log"></Block>
+				<Block offset="1,0,3" type="log"></Block>
+				<Block offset="1,1,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,1,4" type="log"></Block>
+				<Block offset="1,0,4" type="log"></Block>
+				<Block offset="1,1,4" type="log"></Block>
+				<Block offset="0,0,5" type="log"></Block>
+				<Block offset="0,1,5" type="log"></Block>
+				<Block offset="1,0,5" type="log"></Block>
+				<Block offset="1,1,5" type="log"></Block>
+				<Block offset="0,0,6" type="log"></Block>
+				<Block offset="0,1,6" type="log"></Block>
+				<Block offset="1,0,6" type="log"></Block>
+				<Block offset="1,1,6" type="log"></Block>
+				<Block offset="0,0,7" type="log"></Block>
+				<Block offset="0,1,7" type="log"></Block>
+				<Block offset="1,0,7" type="log"></Block>
+				<Block offset="1,1,7" type="log"></Block>
+				<Block offset="0,0,8" type="log"></Block>
+				<Block offset="0,1,8" type="log"></Block>
+				<Block offset="1,0,8" type="log"></Block>
+				<Block offset="1,1,8" type="log"></Block>
+				<Block offset="0,0,9" type="log"></Block>
+				<Block offset="0,1,9" type="log"></Block>
+				<Block offset="1,0,9" type="log"></Block>
+				<Block offset="1,1,9" type="log"></Block>
+				<Block offset="0,0,10" type="log"></Block>
+				<Block offset="0,1,10" type="log"></Block>
+				<Block offset="1,0,10" type="log"></Block>
+				<Block offset="1,1,10" type="log"></Block>
+				<Block offset="0,0,11" type="log"></Block>
+				<Block offset="0,1,11" type="log"></Block>
+				<Block offset="1,0,11" type="log"></Block>
+				<Block offset="1,1,11" type="log"></Block>
+				<Block offset="0,0,12" type="log"></Block>
+				<Block offset="0,1,12" type="log"></Block>
+				<Block offset="1,0,12" type="log"></Block>
+				<Block offset="1,1,12" type="log"></Block>
+				<Block offset="0,0,13" type="log"></Block>
+				<Block offset="0,1,13" type="log"></Block>
+				<Block offset="1,0,13" type="log"></Block>
+				<Block offset="1,1,13" type="log"></Block>
+				<Block offset="0,0,14" type="log"></Block>
+				<Block offset="0,1,14" type="log"></Block>
+				<Block offset="1,0,14" type="log"></Block>
+				<Block offset="1,1,14" type="log"></Block>
+				<Block offset="0,0,15" type="log"></Block>
+				<Block offset="0,1,15" type="log"></Block>
+				<Block offset="1,0,15" type="log"></Block>
+				<Block offset="1,1,15" type="log"></Block>
+				<Block offset="0,0,16" type="log"></Block>
+				<Block offset="0,1,16" type="log"></Block>
+				<Block offset="1,0,16" type="log"></Block>
+				<Block offset="1,1,16" type="log"></Block>
+				<Block offset="0,0,17" type="log"></Block>
+				<Block offset="0,1,17" type="log"></Block>
+				<Block offset="1,0,17" type="log"></Block>
+				<Block offset="1,1,17" type="log"></Block>
+				
+				<Block offset="2,0,10" type="log"></Block>
+				<Block offset="2,1,11" type="log"></Block>
+				<Block offset="3,0,10" type="log"></Block>
+				<Block offset="3,1,11" type="log"></Block>
+				<Block offset="4,1,10" type="log"></Block>
+				
+				<Block offset="5,1,10" type="Leaves"></Block>
+				<Block offset="3,1,10" type="Leaves"></Block>
+				<Block offset="4,2,10" type="Leaves"></Block>
+				<Block offset="4,0,10" type="Leaves"></Block>
+				<Block offset="5,2,10" type="Leaves"></Block>
+				<Block offset="5,0,10" type="Leaves"></Block>
+				<Block offset="3,2,10" type="Leaves"></Block>
+				<Block offset="3,0,10" type="Leaves"></Block>
+				<Block offset="4,3,10" type="Leaves"></Block>
+				<Block offset="4,-1,10" type="Leaves"></Block>
+				<Block offset="6,1,10" type="Leaves"></Block>
+				<Block offset="2,1,10" type="Leaves"></Block>
+				<Block offset="4,1,11" type="Leaves"></Block>
+				<Block offset="5,1,11" type="Leaves"></Block>
+				<Block offset="4,2,11" type="Leaves"></Block>
+				<Block offset="4,0,11" type="Leaves"></Block>
+				<Block offset="3,-1,11" type="Leaves"></Block>
+				<Block offset="3,2,11" type="Leaves"></Block>
+				<Block offset="4,1,12" type="Leaves"></Block>
+				<Block offset="5,1,12" type="Leaves"></Block>
+				<Block offset="3,1,12" type="Leaves"></Block>
+				<Block offset="4,2,12" type="Leaves"></Block>
+				<Block offset="4,0,12" type="Leaves"></Block>
+				<Block offset="4,1,9" type="leaves"></Block>
+				<Block offset="3,1,9" type="leaves"></Block>
+				<Block offset="3,0,9" type="leaves"></Block>
+				<Block offset="2,0,9" type="leaves"></Block>
+				<Block offset="2,-1,10" type="leaves"></Block>
+				<Block offset="3,0,11" type="leaves"></Block>
+				
+				
+				<Block offset="1,0,17" type="leaves"></Block>
+				<Block offset="2,0,17" type="leaves"></Block>
+				<Block offset="3,0,17" type="leaves"></Block>
+				<Block offset="4,0,17" type="leaves"></Block>
+				<Block offset="5,0,17" type="leaves"></Block>
+				<Block offset="-1,0,17" type="leaves"></Block>
+				<Block offset="-2,0,17" type="leaves"></Block>
+				<Block offset="-3,0,17" type="leaves"></Block>
+				<Block offset="-4,0,17" type="leaves"></Block>
+				<Block offset="0,1,17" type="leaves"></Block>
+				<Block offset="0,2,17" type="leaves"></Block>
+				<Block offset="0,3,17" type="leaves"></Block>
+				<Block offset="0,4,17" type="leaves"></Block>
+				<Block offset="0,5,17" type="leaves"></Block>
+				<Block offset="0,-1,17" type="leaves"></Block>
+				<Block offset="0,-2,17" type="leaves"></Block>
+				<Block offset="0,-3,17" type="leaves"></Block>
+				<Block offset="0,-4,17" type="leaves"></Block>
+				<Block offset="1,1,17" type="leaves"></Block>
+				<Block offset="1,2,17" type="leaves"></Block>
+				<Block offset="1,3,17" type="leaves"></Block>
+				<Block offset="1,4,17" type="leaves"></Block>
+				<Block offset="1,5,17" type="leaves"></Block>
+				<Block offset="1,-1,17" type="leaves"></Block>
+				<Block offset="1,-2,17" type="leaves"></Block>
+				<Block offset="1,-3,17" type="leaves"></Block>
+				<Block offset="1,-4,17" type="leaves"></Block>
+				<Block offset="2,1,17" type="leaves"></Block>
+				<Block offset="2,2,17" type="leaves"></Block>
+				<Block offset="2,3,17" type="leaves"></Block>
+				<Block offset="2,4,17" type="leaves"></Block>
+				<Block offset="2,-1,17" type="leaves"></Block>
+				<Block offset="2,-2,17" type="leaves"></Block>
+				<Block offset="2,-3,17" type="leaves"></Block>
+				<Block offset="3,1,17" type="leaves"></Block>
+				<Block offset="3,2,17" type="leaves"></Block>
+				<Block offset="3,3,17" type="leaves"></Block>
+				<Block offset="3,4,17" type="leaves"></Block>
+				<Block offset="3,-1,17" type="leaves"></Block>
+				<Block offset="3,-2,17" type="leaves"></Block>
+				<Block offset="3,-3,17" type="leaves"></Block>
+				<Block offset="4,1,17" type="leaves"></Block>
+				<Block offset="4,2,17" type="leaves"></Block>
+				<Block offset="4,3,17" type="leaves"></Block>
+				<Block offset="4,-1,17" type="leaves"></Block>
+				<Block offset="4,-2,17" type="leaves"></Block>
+				<Block offset="5,1,17" type="leaves"></Block>
+				<Block offset="-1,1,17" type="leaves"></Block>
+				<Block offset="-1,2,17" type="leaves"></Block>
+				<Block offset="-1,3,17" type="leaves"></Block>
+				<Block offset="-1,4,17" type="leaves"></Block>
+				<Block offset="-1,-1,17" type="leaves"></Block>
+				<Block offset="-1,-2,17" type="leaves"></Block>
+				<Block offset="-1,-3,17" type="leaves"></Block>		   
+				<Block offset="-2,1,17" type="leaves"></Block>
+				<Block offset="-2,2,17" type="leaves"></Block>
+				<Block offset="-2,3,17" type="leaves"></Block>
+				<Block offset="-2,4,17" type="leaves"></Block>
+				<Block offset="-2,-1,17" type="leaves"></Block>
+				<Block offset="-2,-2,17" type="leaves"></Block>
+				<Block offset="-2,-3,17" type="leaves"></Block>   
+				<Block offset="-3,1,17" type="leaves"></Block>
+				<Block offset="-3,2,17" type="leaves"></Block>
+				<Block offset="-3,3,17" type="leaves"></Block>
+				<Block offset="-3,-1,17" type="leaves"></Block>
+				<Block offset="-3,-2,17" type="leaves"></Block>		   
+				<Block offset="-4,1,17" type="leaves"></Block>
+				<Block offset="0,0,18" type="leaves"></Block>
+				<Block offset="1,0,18" type="leaves"></Block>
+				<Block offset="2,0,18" type="leaves"></Block>
+				<Block offset="3,0,18" type="leaves"></Block>
+				<Block offset="4,0,18" type="leaves"></Block>
+				<Block offset="-1,0,18" type="leaves"></Block>
+				<Block offset="-2,0,18" type="leaves"></Block>
+				<Block offset="-3,0,18" type="leaves"></Block>
+				<Block offset="0,1,18" type="leaves"></Block>
+				<Block offset="0,2,18" type="leaves"></Block>
+				<Block offset="0,3,18" type="leaves"></Block>
+				<Block offset="0,4,18" type="leaves"></Block>
+				<Block offset="0,-1,18" type="leaves"></Block>
+				<Block offset="0,-2,18" type="leaves"></Block>
+				<Block offset="0,-3,18" type="leaves"></Block>
+				<Block offset="1,1,18" type="leaves"></Block>
+				<Block offset="1,2,18" type="leaves"></Block>
+				<Block offset="1,3,18" type="leaves"></Block>
+				<Block offset="1,4,18" type="leaves"></Block>
+				<Block offset="1,-1,18" type="leaves"></Block>
+				<Block offset="1,-2,18" type="leaves"></Block>
+				<Block offset="1,-3,18" type="leaves"></Block>
+				<Block offset="2,1,18" type="leaves"></Block>
+				<Block offset="2,2,18" type="leaves"></Block>
+				<Block offset="2,3,18" type="leaves"></Block>
+				<Block offset="2,-1,18" type="leaves"></Block>
+				<Block offset="2,-2,18" type="leaves"></Block>
+				<Block offset="3,1,18" type="leaves"></Block>
+				<Block offset="3,2,18" type="leaves"></Block>
+				<Block offset="3,-1,18" type="leaves"></Block>
+				<Block offset="4,1,18" type="leaves"></Block>
+				<Block offset="-1,1,18" type="leaves"></Block>
+				<Block offset="-1,2,18" type="leaves"></Block>
+				<Block offset="-1,3,18" type="leaves"></Block>
+				<Block offset="-1,-1,18" type="leaves"></Block>
+				<Block offset="-1,-2,18" type="leaves"></Block>		   
+				<Block offset="-2,1,18" type="leaves"></Block>
+				<Block offset="-2,2,18" type="leaves"></Block>
+				<Block offset="-2,-1,18" type="leaves"></Block>
+				<Block offset="-3,1,18" type="leaves"></Block>
+				<Block offset="0,0,19" type="leaves"></Block>
+				<Block offset="1,0,19" type="leaves"></Block>
+				<Block offset="2,0,19" type="leaves"></Block>
+				<Block offset="3,0,19" type="leaves"></Block>
+				<Block offset="-1,0,19" type="leaves"></Block>
+				<Block offset="-2,0,19" type="leaves"></Block>
+				<Block offset="0,1,19" type="leaves"></Block>
+				<Block offset="0,2,19" type="leaves"></Block>
+				<Block offset="0,3,19" type="leaves"></Block>
+				<Block offset="0,-1,19" type="leaves"></Block>
+				<Block offset="0,-2,19" type="leaves"></Block>
+				<Block offset="1,1,19" type="leaves"></Block>
+				<Block offset="1,2,19" type="leaves"></Block>
+				<Block offset="1,3,19" type="leaves"></Block>
+				<Block offset="1,-1,19" type="leaves"></Block>
+				<Block offset="1,-2,19" type="leaves"></Block>
+				<Block offset="2,1,19" type="leaves"></Block>
+				<Block offset="2,2,19" type="leaves"></Block>
+				<Block offset="2,-1,19" type="leaves"></Block>
+				<Block offset="3,1,19" type="leaves"></Block>
+				<Block offset="-1,1,19" type="leaves"></Block>
+				<Block offset="-1,2,19" type="leaves"></Block>
+				<Block offset="-1,-1,19" type="leaves"></Block>		   
+				<Block offset="-2,1,19" type="leaves"></Block>
+
+				
+							   
+				
+				
+				
+				
+				
+				
+			</TreeStamp>
+			<TreeStamp name="Jungle Brush" log="JungleLog" leaves="JungleLeaves"  heightRange="0~1" treeHeight="3">
+				<Block offset="0,0,0" type="log"></Block>
+				
+				<Block offset="1,0,0" type="leaves"></Block>
+				<Block offset="2,0,0" type="leaves"></Block>
+				<Block offset="0,1,0" type="leaves"></Block>
+				<Block offset="0,2,0" type="leaves"></Block>
+				<Block offset="2,1,0" type="leaves"></Block>
+				<Block offset="2,-1,0" type="leaves"></Block>
+				<Block offset="1,2,0" type="leaves"></Block>
+				<Block offset="-1,2,0" type="leaves"></Block>
+				<Block offset="-2,1,0" type="leaves"></Block>
+				<Block offset="-2,-1,0" type="leaves"></Block>
+				<Block offset="1,-2,0" type="leaves"></Block>
+				<Block offset="-1,-2,0" type="leaves"></Block>
+				<Block offset="-1,0,0" type="leaves"></Block>
+				<Block offset="-2,0,0" type="leaves"></Block>
+				<Block offset="0,-1,0" type="leaves"></Block>
+				<Block offset="0,-2,0" type="leaves"></Block>
+				<Block offset="1,1,0" type="leaves"></Block>
+				<Block offset="2,2,0" type="leaves"></Block>
+				<Block offset="-1,-1,0" type="leaves"></Block>
+				<Block offset="-2,-2,0" type="leaves"></Block>
+				<Block offset="-1,1,0" type="leaves"></Block>
+				<Block offset="-2,2,0" type="leaves"></Block>
+				<Block offset="1,-1,0" type="leaves"></Block>
+				<Block offset="2,-2,0" type="leaves"></Block>
+				
+				<Block offset="0,0,1" type="leaves"></Block>
+				<Block offset="1,0,1" type="leaves"></Block>
+				<Block offset="0,1,1" type="leaves"></Block>
+				<Block offset="-1,0,1" type="leaves"></Block>
+				<Block offset="0,-1,1" type="leaves"></Block>
+				<Block offset="1,1,1" type="leaves"></Block>
+				<Block offset="1,-1,1" type="leaves"></Block>
+				<Block offset="-1,1,1" type="leaves"></Block>
+				<Block offset="-1,-1,1" type="leaves"></Block>
+				
+				<Block offset="0,0,2" type="leaves"></Block>
+			
+			</TreeStamp>
+			<TreeStamp name="Spruce" log="SpruceLog" leaves="SpruceLeaves"  heightRange="0~4" treeHeight="11">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,0,5" type="log"></Block>
+				<Block offset="0,0,6" type="log"></Block>
+				<Block offset="0,0,7" type="log"></Block>
+				<Block offset="0,0,8" type="log"></Block>
+				
+				<Block offset="1,0,3" type="leaves"></Block>
+				<Block offset="2,0,3" type="leaves"></Block>
+				<Block offset="0,1,3" type="leaves"></Block>
+				<Block offset="0,2,3" type="leaves"></Block>
+				<Block offset="2,1,3" type="leaves"></Block>
+				<Block offset="2,-1,3" type="leaves"></Block>
+				<Block offset="1,2,3" type="leaves"></Block>
+				<Block offset="-1,2,3" type="leaves"></Block>
+				<Block offset="-2,1,3" type="leaves"></Block>
+				<Block offset="-2,-1,3" type="leaves"></Block>
+				<Block offset="1,-2,3" type="leaves"></Block>
+				<Block offset="-1,-2,3" type="leaves"></Block>
+				<Block offset="-1,0,3" type="leaves"></Block>
+				<Block offset="-2,0,3" type="leaves"></Block>
+				<Block offset="0,-1,3" type="leaves"></Block>
+				<Block offset="0,-2,3" type="leaves"></Block>
+				<Block offset="1,1,3" type="leaves"></Block>
+				<Block offset="2,2,3" type="leaves"></Block>
+				<Block offset="-1,-1,3" type="leaves"></Block>
+				<Block offset="-2,-2,3" type="leaves"></Block>
+				<Block offset="-1,1,3" type="leaves"></Block>
+				<Block offset="-2,2,3" type="leaves"></Block>
+				<Block offset="1,-1,3" type="leaves"></Block>
+				<Block offset="2,-2,3" type="leaves"></Block>
+				<Block offset="3,0,3" type="leaves"></Block>
+				<Block offset="0,3,3" type="leaves"></Block>
+				<Block offset="-3,0,3" type="leaves"></Block>
+				<Block offset="0,-3,3" type="leaves"></Block>
+				<Block offset="3,1,3" type="leaves"></Block>
+				<Block offset="1,3,3" type="leaves"></Block>
+				<Block offset="-3,1,3" type="leaves"></Block>
+				<Block offset="1,-3,3" type="leaves"></Block>
+				<Block offset="3,-1,3" type="leaves"></Block>
+				<Block offset="-1,3,3" type="leaves"></Block>
+				<Block offset="-3,-1,3" type="leaves"></Block>
+				<Block offset="-1,-3,3" type="leaves"></Block>
+				<Block offset="3,2,3" type="leaves"></Block>
+				<Block offset="2,3,3" type="leaves"></Block>
+				<Block offset="-3,2,3" type="leaves"></Block>
+				<Block offset="2,-3,3" type="leaves"></Block>
+				<Block offset="3,-2,3" type="leaves"></Block>
+				<Block offset="-2,3,3" type="leaves"></Block>
+				<Block offset="-3,-2,3" type="leaves"></Block>
+				<Block offset="-2,-3,3" type="leaves"></Block>
+				
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="2,0,4" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="0,2,4" type="leaves"></Block>
+				<Block offset="2,1,4" type="leaves"></Block>
+				<Block offset="2,-1,4" type="leaves"></Block>
+				<Block offset="1,2,4" type="leaves"></Block>
+				<Block offset="-1,2,4" type="leaves"></Block>
+				<Block offset="-2,1,4" type="leaves"></Block>
+				<Block offset="-2,-1,4" type="leaves"></Block>
+				<Block offset="1,-2,4" type="leaves"></Block>
+				<Block offset="-1,-2,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="-2,0,4" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="0,-2,4" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+
+				<Block offset="1,0,5" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+
+				<Block offset="1,0,6" type="leaves"></Block>
+				<Block offset="2,0,6" type="leaves"></Block>
+				<Block offset="0,1,6" type="leaves"></Block>
+				<Block offset="0,2,6" type="leaves"></Block>
+				<Block offset="2,1,6" type="leaves"></Block>
+				<Block offset="2,-1,6" type="leaves"></Block>
+				<Block offset="1,2,6" type="leaves"></Block>
+				<Block offset="-1,2,6" type="leaves"></Block>
+				<Block offset="-2,1,6" type="leaves"></Block>
+				<Block offset="-2,-1,6" type="leaves"></Block>
+				<Block offset="1,-2,6" type="leaves"></Block>
+				<Block offset="-1,-2,6" type="leaves"></Block>
+				<Block offset="-1,0,6" type="leaves"></Block>
+				<Block offset="-2,0,6" type="leaves"></Block>
+				<Block offset="0,-1,6" type="leaves"></Block>
+				<Block offset="0,-2,6" type="leaves"></Block>
+				<Block offset="1,1,6" type="leaves"></Block>
+				<Block offset="-1,-1,6" type="leaves"></Block>
+				<Block offset="-1,1,6" type="leaves"></Block>
+				<Block offset="1,-1,6" type="leaves"></Block>
+
+				<Block offset="1,0,7" type="leaves"></Block>
+				<Block offset="-1,0,7" type="leaves"></Block>
+				<Block offset="0,1,7" type="leaves"></Block>
+				<Block offset="0,-1,7" type="leaves"></Block>
+
+				<Block offset="0,0,9" type="leaves"></Block>
+				<Block offset="1,0,9" type="leaves"></Block>
+				<Block offset="-1,0,9" type="leaves"></Block>
+				<Block offset="0,1,9" type="leaves"></Block>
+				<Block offset="0,-1,9" type="leaves"></Block>
+
+				<Block offset="0,0,10" type="leaves"></Block>
+				
+			</TreeStamp>
+			<TreeStamp name="Snowy Spruce" log="SpruceLog" leaves="SpruceLeavesSnow"  heightRange="0~6" treeHeight="11">
+				<Block offset="0,0,0" type="log"></Block>
+				<Block offset="0,0,1" type="log"></Block>
+				<Block offset="0,0,2" type="log"></Block>
+				<Block offset="0,0,3" type="log"></Block>
+				<Block offset="0,0,4" type="log"></Block>
+				<Block offset="0,0,5" type="log"></Block>
+				<Block offset="0,0,6" type="log"></Block>
+				<Block offset="0,0,7" type="log"></Block>
+				<Block offset="0,0,8" type="log"></Block>
+
+				<Block offset="1,0,3" type="leaves"></Block>
+				<Block offset="2,0,3" type="leaves"></Block>
+				<Block offset="0,1,3" type="leaves"></Block>
+				<Block offset="0,2,3" type="leaves"></Block>
+				<Block offset="2,1,3" type="leaves"></Block>
+				<Block offset="2,-1,3" type="leaves"></Block>
+				<Block offset="1,2,3" type="leaves"></Block>
+				<Block offset="-1,2,3" type="leaves"></Block>
+				<Block offset="-2,1,3" type="leaves"></Block>
+				<Block offset="-2,-1,3" type="leaves"></Block>
+				<Block offset="1,-2,3" type="leaves"></Block>
+				<Block offset="-1,-2,3" type="leaves"></Block>
+				<Block offset="-1,0,3" type="leaves"></Block>
+				<Block offset="-2,0,3" type="leaves"></Block>
+				<Block offset="0,-1,3" type="leaves"></Block>
+				<Block offset="0,-2,3" type="leaves"></Block>
+				<Block offset="1,1,3" type="leaves"></Block>
+				<Block offset="2,2,3" type="leaves"></Block>
+				<Block offset="-1,-1,3" type="leaves"></Block>
+				<Block offset="-2,-2,3" type="leaves"></Block>
+				<Block offset="-1,1,3" type="leaves"></Block>
+				<Block offset="-2,2,3" type="leaves"></Block>
+				<Block offset="1,-1,3" type="leaves"></Block>
+				<Block offset="2,-2,3" type="leaves"></Block>
+				<Block offset="3,0,3" type="leaves"></Block>
+				<Block offset="0,3,3" type="leaves"></Block>
+				<Block offset="-3,0,3" type="leaves"></Block>
+				<Block offset="0,-3,3" type="leaves"></Block>
+				<Block offset="3,1,3" type="leaves"></Block>
+				<Block offset="1,3,3" type="leaves"></Block>
+				<Block offset="-3,1,3" type="leaves"></Block>
+				<Block offset="1,-3,3" type="leaves"></Block>
+				<Block offset="3,-1,3" type="leaves"></Block>
+				<Block offset="-1,3,3" type="leaves"></Block>
+				<Block offset="-3,-1,3" type="leaves"></Block>
+				<Block offset="-1,-3,3" type="leaves"></Block>
+				<Block offset="3,2,3" type="leaves"></Block>
+				<Block offset="2,3,3" type="leaves"></Block>
+				<Block offset="-3,2,3" type="leaves"></Block>
+				<Block offset="2,-3,3" type="leaves"></Block>
+				<Block offset="3,-2,3" type="leaves"></Block>
+				<Block offset="-2,3,3" type="leaves"></Block>
+				<Block offset="-3,-2,3" type="leaves"></Block>
+				<Block offset="-2,-3,3" type="leaves"></Block>
+
+				<Block offset="1,0,4" type="leaves"></Block>
+				<Block offset="2,0,4" type="leaves"></Block>
+				<Block offset="0,1,4" type="leaves"></Block>
+				<Block offset="0,2,4" type="leaves"></Block>
+				<Block offset="2,1,4" type="leaves"></Block>
+				<Block offset="2,-1,4" type="leaves"></Block>
+				<Block offset="1,2,4" type="leaves"></Block>
+				<Block offset="-1,2,4" type="leaves"></Block>
+				<Block offset="-2,1,4" type="leaves"></Block>
+				<Block offset="-2,-1,4" type="leaves"></Block>
+				<Block offset="1,-2,4" type="leaves"></Block>
+				<Block offset="-1,-2,4" type="leaves"></Block>
+				<Block offset="-1,0,4" type="leaves"></Block>
+				<Block offset="-2,0,4" type="leaves"></Block>
+				<Block offset="0,-1,4" type="leaves"></Block>
+				<Block offset="0,-2,4" type="leaves"></Block>
+				<Block offset="1,1,4" type="leaves"></Block>
+				<Block offset="-1,-1,4" type="leaves"></Block>
+				<Block offset="-1,1,4" type="leaves"></Block>
+				<Block offset="1,-1,4" type="leaves"></Block>
+
+				<Block offset="1,0,5" type="leaves"></Block>
+				<Block offset="-1,0,5" type="leaves"></Block>
+				<Block offset="0,1,5" type="leaves"></Block>
+				<Block offset="0,-1,5" type="leaves"></Block>
+
+				<Block offset="1,0,6" type="leaves"></Block>
+				<Block offset="2,0,6" type="leaves"></Block>
+				<Block offset="0,1,6" type="leaves"></Block>
+				<Block offset="0,2,6" type="leaves"></Block>
+				<Block offset="2,1,6" type="leaves"></Block>
+				<Block offset="2,-1,6" type="leaves"></Block>
+				<Block offset="1,2,6" type="leaves"></Block>
+				<Block offset="-1,2,6" type="leaves"></Block>
+				<Block offset="-2,1,6" type="leaves"></Block>
+				<Block offset="-2,-1,6" type="leaves"></Block>
+				<Block offset="1,-2,6" type="leaves"></Block>
+				<Block offset="-1,-2,6" type="leaves"></Block>
+				<Block offset="-1,0,6" type="leaves"></Block>
+				<Block offset="-2,0,6" type="leaves"></Block>
+				<Block offset="0,-1,6" type="leaves"></Block>
+				<Block offset="0,-2,6" type="leaves"></Block>
+				<Block offset="1,1,6" type="leaves"></Block>
+				<Block offset="-1,-1,6" type="leaves"></Block>
+				<Block offset="-1,1,6" type="leaves"></Block>
+				<Block offset="1,-1,6" type="leaves"></Block>
+
+				<Block offset="1,0,7" type="leaves"></Block>
+				<Block offset="-1,0,7" type="leaves"></Block>
+				<Block offset="0,1,7" type="leaves"></Block>
+				<Block offset="0,-1,7" type="leaves"></Block>
+
+				<Block offset="0,0,9" type="leaves"></Block>
+				<Block offset="1,0,9" type="leaves"></Block>
+				<Block offset="-1,0,9" type="leaves"></Block>
+				<Block offset="0,1,9" type="leaves"></Block>
+				<Block offset="0,-1,9" type="leaves"></Block>
+
+				<Block offset="0,0,10" type="leaves"></Block>
+			</TreeStamp>
+		</Trees>
+
+	</WorldDefinition>
+</Definitions>

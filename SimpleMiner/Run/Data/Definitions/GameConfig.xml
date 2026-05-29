@@ -1,0 +1,7 @@
+<GameConfig
+	windowAspect="2.0"
+	windowFullscreen="true"
+	windowTitle="Simple Miner"
+	DefaultWorldDefinition="Data/Definitions/DefaulWorldDefinition.xml"
+/>
+
