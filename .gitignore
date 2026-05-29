@@ -37,3 +37,31 @@
 
 # debug information files
 *.dwo
+
+# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output folders
+Debug/
+Release/
+x64/
+x86/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Logs
+*.log
+
+# Windows
+Thumbs.db
+Desktop.ini
