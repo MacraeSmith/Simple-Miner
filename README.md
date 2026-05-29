@@ -12,9 +12,7 @@
 
 Simple Miner is a Minecraft-inspired voxel sandbox built entirely within my custom C++ game engine.
 
-The project focuses on procedural world generation, multithreaded chunk streaming, voxel lighting, fluid simulation, and large-scale terrain generation. The world is generated dynamically around the player using a chunk-based architecture that supports effectively endless exploration while maintaining predictable memory and CPU usage.
-
-Terrain generation combines multiple layered noise functions to create varied landscapes, underground cave networks, climate-driven biomes, and procedural vegetation.
+The project features procedural terrain generation, multithreaded chunk streaming, voxel lighting, fluid simulation, and real-time terrain destruction. The world is generated dynamically around the player, enabling large-scale exploration while maintaining predictable CPU and memory usage.
 
 ## Technical Deep Dive
 
@@ -38,48 +36,31 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 ## Key Features
 
-### Infinite Voxel World
+### Procedural Voxel World
 
-* Chunk-based world architecture
-* Dynamic loading and unloading
+* Infinite chunk-based terrain streaming
 * Configurable render distance
-* Multithreaded chunk generation
+* Multithreaded world generation
 
-### Advanced Procedural Generation
+### Advanced Terrain Generation
 
-* Layered Perlin and Fractal noise
-* Ridged and domain-warped noise
-* Climate-based biome generation
+* Layered Perlin, Fractal, Ridged, and Domain-Warped noise
+* Climate-driven biome distribution
 * Procedural vegetation placement
-* Large-scale cave systems
+* Large-scale cave networks
 
-### Voxel Lighting
+### Dynamic World Simulation
 
-* Dynamic skylight propagation
-* Emissive light sources
-* Flood-fill light propagation
-* Real-time lighting updates
-
-### Liquid Simulation
-
-* Dynamic water flow
-* Lava simulation
-* Cross-chunk liquid propagation
-* Height-based flow visualization
-
-### Terrain Destruction
-
-* TNT explosions
-* Dynamic terrain modification
-* Lighting recalculation
-* Physics interactions
+* Flood-fill voxel lighting
+* Water and lava simulation
+* Real-time terrain destruction
+* TNT chain reactions and physics interactions
 
 ### Player Systems
 
-* First-person controls
-* Block interaction
+* First-person exploration
+* Block interaction and editing
 * Physics-based movement
-* Real-time world editing
 
 ---
 
@@ -100,62 +81,19 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 ### Launch Prebuilt Executable
 
 ```text
-Run/SimpleMiner_Release_x64.exe
+SimpleMiner/Run/SimpleMiner_Release_x64.exe
 ```
 
 ### Build From Source
 
-1. Open the solution in Visual Studio 2022
-2. Build:
-
-```text
-Ctrl + Shift + B
-```
-
-3. Run:
-
-```text
-F5
-```
+1. Open `SimpleMiner/SimpleMiner.sln` in Visual Studio 2022
+2. Build with `Ctrl + Shift + B`
+3. Run with `F5`
 
 Recommended build configurations:
 
 * Release
 * Fast_Break
 
----
-
-## Major Systems
-
-### Chunk Streaming
-
-The world is partitioned into fixed-size chunks that load and unload around the player. Chunk generation runs entirely on worker threads and transitions back to the main thread only when integration into the active world is required.
-
-### Terrain Generation
-
-Terrain is generated using layered Perlin, Fractal, Ridged, and domain-warped noise. Separate noise groups control terrain shaping, caves, climate, and biome distribution, allowing each system to be tuned independently.
-
-### Cave Generation
-
-Large underground cave networks are created using volumetric density fields combined with cheese cave generation and domain-warped tunnel systems.
-
-### Climate and Biomes
-
-Temperature and humidity maps drive biome placement, vegetation spawning, and environmental variation across the world.
-
-### Voxel Lighting
-
-Flood-fill light propagation supports both skylight and emissive light sources while dynamically responding to terrain changes.
-
-### Liquid Simulation
-
-Water and lava use a voxel flood-fill system that supports gravity, directional flow, and seamless propagation across chunk boundaries.
-
-### TNT and Destruction
-
-Explosions modify terrain in real time, trigger lighting updates, and interact with the entity physics system to create dynamic chain reactions.
-
----
-
-
-
+```
+```
