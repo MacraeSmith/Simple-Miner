@@ -123,8 +123,6 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 ---
 
----
-
 ## Running the Project
 
 ### Launch Prebuilt Executable
