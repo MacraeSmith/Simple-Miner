@@ -76,6 +76,55 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 ---
 
+## Controls
+
+### General
+
+| Key | Action |
+|------|------|
+| Space | Start Game |
+| Esc | Exit / Quit |
+| P | Pause |
+| O | Step One Frame |
+| T | Slow Mode |
+
+### Movement
+
+| Key | Action |
+|------|------|
+| Mouse | Look Around |
+| WASD | Move |
+| Q / E | Move Up / Down |
+
+### World Interaction
+
+| Key | Action |
+|------|------|
+| Left Mouse Button | Remove Block |
+| Right Mouse Button | Add Block |
+| R | Lock Player Raycast |
+
+### Debug
+
+| Key | Action |
+|------|------|
+| F1 | Show Performance Statistics |
+| F2 | Toggle Chunk Bounds |
+| F3 | Debug Job System |
+| F4 | Toggle Chunk Loading |
+| F8 | Reset World |
+
+### Modes
+
+| Key | Action |
+|------|------|
+| C | Change Camera Mode |
+| V | Change Physics Mode |
+
+---
+
+---
+
 ## Running the Project
 
 ### Launch Prebuilt Executable
