@@ -100,12 +100,12 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 ### Launch Prebuilt Executable
 
 ```text
-Run/SimpleMiner_Release_x64.exe
+SimpleMiner/Run/SimpleMiner_Release_x64.exe
 ```
 
 ### Build From Source
 
-1. Open the solution in Visual Studio 2022
+1. Open the ```text SimpleMiner/SimpleMiner.sln``` solution in Visual Studio 2022
 2. Build:
 
 ```text
