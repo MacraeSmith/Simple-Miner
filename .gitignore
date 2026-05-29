@@ -53,6 +53,15 @@ Release/
 x64/
 x86/
 
+#Build output files
+*_Debug_x64.exe
+
+# Temporary folders
+Temporary/
+Temp/
+tmp/
+
+
 # CMake
 CMakeFiles/
 CMakeCache.txt
