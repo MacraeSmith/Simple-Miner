@@ -16,7 +16,7 @@ The project features procedural terrain generation, multithreaded chunk streamin
 
 ## Technical Deep Dive
 
-For a detailed breakdown of the procedural generation systems, chunk streaming architecture, voxel lighting, fluid simulation, and world-building techniques used in this project, visit the full project page:
+For a detailed breakdown of the procedural generation systems, chunk streaming architecture, voxel lighting, fluid simulation, cave generation, and world-building techniques used in this project, visit the full project page:
 
 **https://www.macraesmith.com/projects/simple-miner**
 
@@ -86,14 +86,39 @@ SimpleMiner/Run/SimpleMiner_Release_x64.exe
 
 ### Build From Source
 
-1. Open `SimpleMiner/SimpleMiner.sln` in Visual Studio 2022
-2. Build with `Ctrl + Shift + B`
-3. Run with `F5`
+1. Open `SimpleMiner/SimpleMiner.sln` in Visual Studio 2022.
+
+2. Configure the debugger settings:
+
+   * Right-click the **SimpleMiner** project and select **Properties**
+   * Navigate to **Configuration Properties > Debugging**
+   * Set:
+
+   ```text
+   Command:            $(TargetFileName)
+   Working Directory:  $(SolutionDir)Run/
+   ```
+
+3. Build the solution:
+
+   ```text
+   Ctrl + Shift + B
+   ```
+
+4. Run the project:
+
+   ```text
+   F5
+   ```
 
 Recommended build configurations:
 
 * Release
 * Fast_Break
 
-```
-```
+### Debugger Configuration
+
+<p align="center">
+  <img src="Media/ConfigurationSettings.png" width="90%">
+</p>
+
