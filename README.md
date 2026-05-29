@@ -99,7 +99,7 @@ SimpleMiner/Run/SimpleMiner_Release_x64.exe
    Working Directory:  $(SolutionDir)Run/
    ```
      <p align="center">
-      <img src="Media/ConfigurationSettings.png" width="60%">
+      <img src="Media/ConfigurationSettings.png" width="80%">
     </p>
 
 3. Build the solution:
