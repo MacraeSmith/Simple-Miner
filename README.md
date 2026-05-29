@@ -60,7 +60,7 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 3. Build the solution: ```Ctrl + Shift + B ```
 
-4. Run the project: ```F5 ```
+4. Run the project: ```F5```
 
 Recommended build configurations:
 
