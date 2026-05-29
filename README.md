@@ -98,6 +98,9 @@ SimpleMiner/Run/SimpleMiner_Release_x64.exe
    Command:            $(TargetFileName)
    Working Directory:  $(SolutionDir)Run/
    ```
+   <p align="center">
+  <img src="Media/ConfigurationSettings.png" width="90%">
+  </p>
 
 3. Build the solution:
 
@@ -116,9 +119,5 @@ Recommended build configurations:
 * Release
 * Fast_Break
 
-### Debugger Configuration
 
-<p align="center">
-  <img src="Media/ConfigurationSettings.png" width="90%">
-</p>
 
