@@ -34,48 +34,50 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 ---
 
-## Key Features
+## Running the Project
 
-### Procedural Voxel World
+### Launch Prebuilt Executable
 
-* Infinite chunk-based terrain streaming
-* Configurable render distance
-* Multithreaded world generation
+```text
+SimpleMiner/Run/SimpleMiner_Release_x64.exe
+```
 
-### Advanced Terrain Generation
+### Build From Source
 
-* Layered Perlin, Fractal, Ridged, and Domain-Warped noise
-* Climate-driven biome distribution
-* Procedural vegetation placement
-* Large-scale cave networks
+1. Open `SimpleMiner/SimpleMiner.sln` in Visual Studio 2022.
 
-### Dynamic World Simulation
+2. Configure the debugger settings:
 
-* Flood-fill voxel lighting
-* Water and lava simulation
-* Real-time terrain destruction
-* TNT chain reactions and physics interactions
+   * Right-click the **SimpleMiner** project and select **Properties**
+   * Navigate to **Configuration Properties > Debugging**
+   * Set:
 
-### Player Systems
+   ```text
+   Command:            $(TargetFileName)
+   Working Directory:  $(SolutionDir)Run/
+   ```
+     <p align="center">
+      <img src="Media/ConfigurationSettings.png" width="80%">
+    </p>
 
-* First-person exploration
-* Block interaction and editing
-* Physics-based movement
+3. Build the solution:
+
+   ```text
+   Ctrl + Shift + B
+   ```
+
+4. Run the project:
+
+   ```text
+   F5
+   ```
+
+Recommended build configurations:
+
+* Release
+* Fast_Break
 
 ---
-
-## Screenshots
-
-<p align="center">
-  <img src="Media/SimpleMiner_3DTerrain.png" width="90%">
-</p>
-
-<p align="center">
-  <img src="Media/SimpleMiner_Lighting.png" width="90%">
-</p>
-
----
-
 ## Controls
 
 ### General
@@ -123,48 +125,49 @@ For a detailed breakdown of the procedural generation systems, chunk streaming a
 
 ---
 
-## Running the Project
+## Screenshots
 
-### Launch Prebuilt Executable
+<p align="center">
+  <img src="Media/SimpleMiner_3DTerrain.png" width="90%">
+</p>
 
-```text
-SimpleMiner/Run/SimpleMiner_Release_x64.exe
-```
+<p align="center">
+  <img src="Media/SimpleMiner_Lighting.png" width="90%">
+</p>
 
-### Build From Source
+---
 
-1. Open `SimpleMiner/SimpleMiner.sln` in Visual Studio 2022.
+## Key Features
 
-2. Configure the debugger settings:
+### Procedural Voxel World
 
-   * Right-click the **SimpleMiner** project and select **Properties**
-   * Navigate to **Configuration Properties > Debugging**
-   * Set:
+* Infinite chunk-based terrain streaming
+* Configurable render distance
+* Multithreaded world generation
 
-   ```text
-   Command:            $(TargetFileName)
-   Working Directory:  $(SolutionDir)Run/
-   ```
-     <p align="center">
-      <img src="Media/ConfigurationSettings.png" width="80%">
-    </p>
+### Advanced Terrain Generation
 
-3. Build the solution:
+* Layered Perlin, Fractal, Ridged, and Domain-Warped noise
+* Climate-driven biome distribution
+* Procedural vegetation placement
+* Large-scale cave networks
 
-   ```text
-   Ctrl + Shift + B
-   ```
+### Dynamic World Simulation
 
-4. Run the project:
+* Flood-fill voxel lighting
+* Water and lava simulation
+* Real-time terrain destruction
+* TNT chain reactions and physics interactions
 
-   ```text
-   F5
-   ```
+### Player Systems
 
-Recommended build configurations:
+* First-person exploration
+* Block interaction and editing
+* Physics-based movement
 
-* Release
-* Fast_Break
+---
+
+
 
 
 
