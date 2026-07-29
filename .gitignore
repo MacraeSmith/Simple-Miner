@@ -1,3 +1,4 @@
+
 # Prerequisites
 *.d
 
@@ -6,6 +7,7 @@
 *.lo
 *.o
 *.obj
+
 
 # Precompiled Headers
 *.gch
@@ -74,3 +76,11 @@ compile_commands.json
 # Windows
 Thumbs.db
 Desktop.ini
+
+# MacOS
+.DS_Store
+
+
+# Guildhall Specific
+!**/Run/
+!**/Run/**
